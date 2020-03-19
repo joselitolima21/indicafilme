@@ -1,52 +1,30 @@
-import React, { useState, useEffect } from 'react';
-import { search, genres, searchByGenres } from '../configs/api'
+import React, { useEffect } from 'react';
+import { Container, Row, Col, Button, Input } from 'reactstrap';
+import { genres } from '../configs/api'
 import Card from '../components/Card'
 import NavBar from '../components/NavBar'
 import Search from '../components/Search'
 import Footer from '../components/Footer'
-import { Container, Row, Col, Button, Input } from 'reactstrap';
+import Pagination from '../components/Pagination'
+import { useSelector, useDispatch } from 'react-redux'
+import { actions } from '../store/reducers/reducer.js'
 
 function Home() {
 
-  const [query, setQuery] = useState('')
-  const [response, setResponse] = useState('')
-  const [genresValue, setGenresValue] = useState([])
+  const state = useSelector(state => state.reducer) 
+  const dispatch = useDispatch()
 
   // Baixa os generos toda vez que abre a página
   useEffect(() => {
     async function getGenres() {
       const res = await genres()
-      setGenresValue(res.genres)
+      dispatch(actions.setGenresValue(res.genres))
     }
     getGenres()
   }, []) // eslint-disable-line
 
-  // Procura os filmes por genero
-  const handleSearchByGenre = async (event, genre) => {
-    event.preventDefault()
-    const response = await searchByGenres(1, true, genre)
-
-    response.results.sort(function (a, b) {
-      return b.popularity - a.popularity;
-    });
-
-    setResponse(response)
-  }
-
-  // Procura os filmes por nome dado
-  const handleSearch = async (event) => {
-    event.preventDefault()
-    const response = await search(1, true, query)
-
-    response.results.sort(function (a, b) {
-      return b.popularity - a.popularity;
-    });
-
-    setResponse(response)
-  }
-
   return (
-      <>
+    <>
       <NavBar />
 
       <Container className="themed-container bg-dark p-3" fluid={true}>
@@ -54,15 +32,16 @@ function Home() {
         <Row>
 
           <Col >
-            <Search genresValue={genresValue} handleSearchByGenre={handleSearchByGenre} />
+            <Search />
           </Col>
 
           <Col xs={2} className='p-0'>
-            <Input type="text" placeholder="Digite um filme" onChange={(event) => setQuery(event.target.value)} />
+            <Input type="text" placeholder="Digite um filme" onChange={(event) => dispatch(actions.setQuery(event.target.value))} />
           </Col>
 
           <Col xs={1} className='p-0' >
-            <Button className='ml-1' type="submit" color="info" onClick={(event) => handleSearch(event)}> Buscar </Button>
+            <Button className='ml-1' type="submit" color="info" onClick={(event) => {dispatch(actions.handleSearch(event,state.query,state.page))
+            dispatch(actions.setSearchType('query'))}}> Buscar </Button>
           </Col>
 
         </Row>
@@ -71,7 +50,8 @@ function Home() {
 
 
       <Container className="themed-container text-center row justify-content-between bg-light mb-5 pb-2" fluid={true}>
-        {response && response.results.map((film) => {
+        {state.response &&
+          state.response.results.map((film) => {
           if (film.poster_path) {
             return (
               <Card key={film.id} title={film.title} popularity={film.popularity} votesCount={film.vote_count} votesAverage={film.vote_average}
@@ -79,8 +59,10 @@ function Home() {
             )
           }
           return null
-        })}
+        })
+        }
       </Container>
+      {state.response && <Pagination/>}
       <Footer/>
       </>
   );
