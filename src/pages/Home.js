@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Container, Row, Col, Button, Input } from 'reactstrap';
+import { Container, Button, Input } from 'reactstrap';
 import { genres } from '../configs/api'
 import Card from '../components/Card'
 import NavBar from '../components/NavBar'
@@ -28,27 +28,17 @@ function Home() {
       <Container className="themed-container bg-ligth p-0" fluid={true}>
       <NavBar />
 
-      <Container className="themed-container bg-dark p-3" fluid={true}>
-
-        <Row>
-
-          <Col >
+      <Container className="d-flex justify-content-between bg-dark p-3" fluid={true}>
             <Search />
-          </Col>
-
-          <Col xs={2} className='p-0'>
-            <Input type="text" placeholder="Digite um filme" onChange={(event) => dispatch(actions.setQuery(event.target.value))} />
-          </Col>
-
-          <Col xs={1} className='p-0' >
+            
+            <Container className="d-flex bg-dark m-0 p-0 justify-content-end">
+            <Input className='form-control w-auto ml-2'type="text" placeholder="Digite um filme" onChange={(event) => dispatch(actions.setQuery(event.target.value))} />
             <Button className='ml-1' type="submit" color="info" onClick={(event) => {
               dispatch(actions.setSearchType('query'))
               dispatch(actions.handleSearch(state.query,1))
             }}> Buscar </Button>
-          </Col>
-
-        </Row>
-
+            
+            </Container>
       </Container>
 
 
