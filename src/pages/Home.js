@@ -21,10 +21,11 @@ function Home() {
       dispatch(actions.setGenresValue(res.genres))
     }
     getGenres()
+    dispatch(actions.handleSearchByGenre('',1))
   }, []) // eslint-disable-line
 
   return (
-    <>
+      <Container className="themed-container bg-ligth p-0" fluid={true}>
       <NavBar />
 
       <Container className="themed-container bg-dark p-3" fluid={true}>
@@ -40,7 +41,7 @@ function Home() {
           </Col>
 
           <Col xs={1} className='p-0' >
-            <Button className='ml-1' type="submit" color="info" onClick={(event) => {dispatch(actions.handleSearch(event,state.query,state.page))
+            <Button className='ml-1' type="submit" color="info" onClick={(event) => {dispatch(actions.handleSearch(state.query,state.page))
             dispatch(actions.setSearchType('query'))}}> Buscar </Button>
           </Col>
 
@@ -49,13 +50,18 @@ function Home() {
       </Container>
 
 
-      <Container className="themed-container text-center row justify-content-between bg-light mb-5 pb-2" fluid={true}>
+      <Container className="themed-container ml-auto mr-auto text-center row justify-content-center bg-light pr-0 pl-0" fluid="lg">
         {state.response &&
           state.response.results.map((film) => {
           if (film.poster_path) {
             return (
-              <Card key={film.id} title={film.title} popularity={film.popularity} votesCount={film.vote_count} votesAverage={film.vote_average}
-                imagePath={film.poster_path} adult={film.adult} />
+              <Card key={film.id} 
+                    title={film.title} 
+                    popularity={film.popularity} 
+                    votesAverage={film.vote_average}
+                    imagePath={film.poster_path}
+                    overview={film.overview}
+                    />
             )
           }
           return null
@@ -64,7 +70,7 @@ function Home() {
       </Container>
       {state.response && <Pagination/>}
       <Footer/>
-      </>
+      </Container>
   );
 }
 

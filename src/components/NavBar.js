@@ -1,28 +1,35 @@
-import React, { useState } from 'react';
+import React /*,{ useState }*/ from 'react';
 import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
+  Navbar,  
   NavbarBrand,
+  /*Collapse,
+  NavbarToggler,
   Nav,
   NavItem,
   NavLink,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem,
+  DropdownItem,*/
 } from 'reactstrap';
 
 const NavBar = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
+  //const [isOpen, setIsOpen] = useState(false);
 
-  const toggle = () => setIsOpen(!isOpen);
+  //const toggle = () => setIsOpen(!isOpen);
 
   return (
     <div>
       <Navbar color="light" light expand="md">
         <NavbarBrand href="/">Indique-me um Filme</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
+      </Navbar>
+    </div>
+  );
+}
+
+export default NavBar;
+
+/*<NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
             <NavItem>
@@ -49,10 +56,4 @@ const NavBar = (props) => {
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
-        </Collapse>
-      </Navbar>
-    </div>
-  );
-}
-
-export default NavBar;
+        </Collapse>*/

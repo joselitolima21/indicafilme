@@ -59,8 +59,7 @@ export const actions = {
     searchFailed: (error) => (
         { type: 'SEARCH_FAILED', error: error }
     ),
-    handleSearchByGenre: (event, genre, page) => {
-        event.preventDefault()
+    handleSearchByGenre: (genre, page) => {
         return dispatch => {
             dispatch(actions.searchStarted());
 
@@ -77,8 +76,7 @@ export const actions = {
         };
     },
     // Procura os filmes por nome dado
-    handleSearch: (event, query, page, ) => {
-        event.preventDefault()
+    handleSearch: (query, page, ) => {
         return dispatch => {
             dispatch(actions.searchStarted());
 

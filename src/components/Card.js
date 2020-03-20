@@ -1,17 +1,17 @@
 import React from 'react';
-import { Card, CardImg, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
+import { Card, CardImg, CardBody, CardTitle, CardText, Progress } from 'reactstrap';
 
 function CardFilm(props) {
-  const { title, popularity, votesCount, votesAverage, imagePath, adult } = props
+  const { title, votesAverage, imagePath, overview } = props
   return (
-    <Card className='card text-center m-3' style={{ width: '200px' }}>
-      <CardImg top width="100%" src={`https://image.tmdb.org/t/p/w500${imagePath}`} alt={title} />
+    <Card className='card text-center mt-2 ml-3 mr-3 mb-3 p-0' style={{ width: '300px', height: '650px' }}>
+      <CardImg top src={`https://image.tmdb.org/t/p/w500${imagePath}`} width={300} height={400} alt={title} />
       <CardBody>
-        <CardTitle>{title}</CardTitle>
-        <CardSubtitle>Popularidade: {popularity}</CardSubtitle>
-        <CardSubtitle>Número de votos: {votesCount}</CardSubtitle>
-        <CardSubtitle>Média de votos: {votesAverage}</CardSubtitle>
-        <CardSubtitle>Adulto: {adult ? 'Sim' : 'Não'}</CardSubtitle>
+        <div className="text-center">{votesAverage*10}%</div>
+        <Progress color={votesAverage >= 7 ? "success" : votesAverage >= 6 ? "info" : 'warning'} value={votesAverage*10} />
+        <CardTitle className='mt-3'>{title}</CardTitle>
+      <CardText className='text-center'>{overview.substr(0, 150)}...</CardText>
+
       </CardBody>
     </Card>
   );

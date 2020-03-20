@@ -27,7 +27,7 @@ const PaginationCom = (props) => {
 
         
 
-        <Pagination className="mb-5 pb-2 bg-light row d-flex justify-content-center align-middle" aria-label="Page navigation example">
+        <Pagination className="container-fluid bg-light row d-flex justify-content-center align-middle" aria-label="Page navigation example">
             <PaginationItem>
                 <PaginationLink first href="#" />
             </PaginationItem>
