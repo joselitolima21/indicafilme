@@ -14,7 +14,6 @@ const Search = (props) => {
     const toggle = () => setDropdownOpen(prevState => !prevState);
 
     return (
-    
             <Dropdown isOpen={dropdownOpen} toggle={toggle}>
                 <DropdownToggle className="ml-2" caret>
                     {choiecedGenre}

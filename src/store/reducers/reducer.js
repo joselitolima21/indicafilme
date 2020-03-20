@@ -8,13 +8,14 @@ const initialState = {
     idGenreChoiced: '',
     loading: false,
     error: null,
-    searchType: ''
+    searchType: '',
+    device: ''
 };
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case 'CHANGE_SEARCH_TYPE':
-            return {...state, searchType: action.searchType };
+            return { ...state, searchType: action.searchType };
         case 'CHANGE_QUERY':
             return { ...state, query: action.query };
         case 'CHANGE_RESPONSE':
@@ -29,6 +30,8 @@ export default function reducer(state = initialState, action) {
             return { ...state, loading: true };
         case 'SEARCH_FAILED':
             return { ...state, loading: false, error: action.error };
+        case 'CHECK_DEVICE':
+            return { ...state, device: action.device };
         default:
             return state
     }
@@ -60,7 +63,7 @@ export const actions = {
         { type: 'SEARCH_FAILED', error: error }
     ),
     handleSearchByGenre: (genre, page) => {
-  
+
         return dispatch => {
             dispatch(actions.searchStarted());
 
@@ -77,7 +80,7 @@ export const actions = {
         };
     },
     // Procura os filmes por nome dado
-    handleSearch: (query, page,) => {
+    handleSearch: (query, page, ) => {
         return dispatch => {
             dispatch(actions.searchStarted());
 
@@ -89,9 +92,16 @@ export const actions = {
                     dispatch(actions.setResponse(response))
                 }
             )
-            .catch(err => {
-                dispatch(actions.searchFailed(err.message));
-            });
+                .catch(err => {
+                    dispatch(actions.searchFailed(err.message));
+                });
         }
     },
+    checkDevice: () => {
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+            return { type: 'CHECK_DEVICE', device: 'mobile' }
+        } else {
+            return { type: 'CHECK_DEVICE', device: 'pc' }
+        }
+    }
 }

@@ -21,6 +21,7 @@ function Home() {
       dispatch(actions.setGenresValue(res.genres))
     }
     getGenres()
+    dispatch(actions.checkDevice())
     dispatch(actions.handleSearchByGenre('',1))
   }, []) // eslint-disable-line
 
@@ -28,16 +29,23 @@ function Home() {
       <Container className="themed-container bg-ligth p-0" fluid={true}>
       <NavBar />
 
-      <Container className="d-flex justify-content-between bg-dark p-3" fluid={true}>
+      <Container className={state.device === 'mobile' ? "justify-content-center bg-dark p-3"
+                                                      : "d-flex justify-content-between bg-dark p-3"} fluid={true}>
+            
+            <Container className={state.device === 'mobile' ? "d-flex bg-dark m-0 p-0 justify-content-center pb-2"
+                                                            : "d-flex bg-dark m-0 p-0 justify-content-start"}>
             <Search />
-            <Container className="d-flex bg-dark m-0 p-0 justify-content-end">
-            <Input className='form-control w-25 ml-2'type="text" placeholder="Digite um filme" onChange={(event) => dispatch(actions.setQuery(event.target.value))} />
+            </Container>
+            
+            <Container className={state.device === 'mobile' ? "d-flex bg-dark m-0 p-0 justify-content-center"
+                                                            : "d-flex bg-dark m-0 p-0 justify-content-end"}>
+            <Input className='form-control w-50 ml-2'type="text" placeholder="Digite um filme" onChange={(event) => dispatch(actions.setQuery(event.target.value))} />
             <Button className='ml-1' type="submit" color="info" onClick={(event) => {
               dispatch(actions.setSearchType('query'))
               dispatch(actions.handleSearch(state.query,1))
             }}> Buscar </Button>
-            
             </Container>
+     
       </Container>
 
 
