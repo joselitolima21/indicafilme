@@ -6,6 +6,7 @@ import { actions } from '../store/reducers/reducer.js'
 const PaginationCom = (props) => {
     const state = useSelector(state => state.reducer)
     const dispatch = useDispatch()
+    
     var rows
     if (state.device==='mobile') {
         rows = []
@@ -18,8 +19,7 @@ const PaginationCom = (props) => {
             rows.push(1)
         }
     }
-    
-    
+
     const handleSwitchPage = (event, page) => {
         event.preventDefault()
         dispatch(actions.setPage(page))
@@ -40,7 +40,7 @@ const PaginationCom = (props) => {
              
             {rows.map((v,i)=>{
                 return(
-                <PaginationItem key={i} active ={ i+1 === state.page ? true : false}>
+                <PaginationItem key={i} active ={ i+1 === state.page ? true : false} >
                     <PaginationLink key={i}  href="#top" onClick={(event) => handleSwitchPage(event,i+1)}>
                         {i+1}
                     </PaginationLink>

@@ -25,6 +25,7 @@ const Search = (props) => {
                         setChoicedGenre(genre.name);
                         dispatch(actions.setSearchType('genres'));
                         dispatch(actions.setIdGenreChoiced(genre.id));
+                        dispatch(actions.setPage(1))
                         dispatch(actions.handleSearchByGenre(genre.id, 1));
                         }}
                     key={genre.id}>{genre.name}</DropdownItem>)}

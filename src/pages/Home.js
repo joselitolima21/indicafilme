@@ -21,8 +21,8 @@ function Home() {
       dispatch(actions.setGenresValue(res.genres))
     }
     getGenres()
-    dispatch(actions.checkDevice())
     dispatch(actions.handleSearchByGenre('',1))
+    dispatch(actions.checkDevice())
   }, []) // eslint-disable-line
 
   return (
@@ -42,7 +42,9 @@ function Home() {
             <Input className='form-control w-50 ml-2'type="text" placeholder="Digite um filme" onChange={(event) => dispatch(actions.setQuery(event.target.value))} />
             <Button className='ml-1' type="submit" color="info" onClick={(event) => {
               dispatch(actions.setSearchType('query'))
+              dispatch(actions.setPage(1))
               dispatch(actions.handleSearch(state.query,1))
+              
             }}> Buscar </Button>
             </Container>
      

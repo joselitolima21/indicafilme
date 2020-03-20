@@ -8,7 +8,7 @@ const initialState = {
     idGenreChoiced: '',
     loading: false,
     error: null,
-    searchType: '',
+    searchType: 'genres',
     device: ''
 };
 
