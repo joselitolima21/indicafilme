@@ -16,9 +16,9 @@ const PaginationCom = (props) => {
         event.preventDefault()
         dispatch(actions.setPage(page))
         if (state.searchType === 'genres') {
-            dispatch(actions.handleSearchByGenre(event, state.idGenreChoiced, page))
-        } else {
-            dispatch(actions.handleSearch(event, state.query, page))
+            dispatch(actions.handleSearchByGenre(state.idGenreChoiced, page))
+        } else if(state.searchType === 'query'){
+            dispatch(actions.handleSearch(state.query, page))
         }
         window.scrollTo(0,0)
     }

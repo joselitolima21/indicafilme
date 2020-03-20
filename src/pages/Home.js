@@ -41,8 +41,10 @@ function Home() {
           </Col>
 
           <Col xs={1} className='p-0' >
-            <Button className='ml-1' type="submit" color="info" onClick={(event) => {dispatch(actions.handleSearch(state.query,state.page))
-            dispatch(actions.setSearchType('query'))}}> Buscar </Button>
+            <Button className='ml-1' type="submit" color="info" onClick={(event) => {
+              dispatch(actions.setSearchType('query'))
+              dispatch(actions.handleSearch(state.query,1))
+            }}> Buscar </Button>
           </Col>
 
         </Row>

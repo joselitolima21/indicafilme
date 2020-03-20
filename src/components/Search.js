@@ -21,12 +21,12 @@ const Search = (props) => {
                 </DropdownToggle>
                 <DropdownMenu>
                     {state.genresValue.map((genre) => 
-                <DropdownItem 
+                <DropdownItem
                     onClick={() => {
                         setChoicedGenre(genre.name);
-                        dispatch(actions.setIdGenreChoiced(genre.id))
-                        dispatch(actions.handleSearchByGenre(genre.id, state.page))
-                        dispatch(actions.setSearchType('genres'))
+                        dispatch(actions.setSearchType('genres'));
+                        dispatch(actions.setIdGenreChoiced(genre.id));
+                        dispatch(actions.handleSearchByGenre(genre.id, 1));
                         }}
                     key={genre.id}>{genre.name}</DropdownItem>)}
                 </DropdownMenu>
