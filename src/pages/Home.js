@@ -30,9 +30,8 @@ function Home() {
 
       <Container className="d-flex justify-content-between bg-dark p-3" fluid={true}>
             <Search />
-            
             <Container className="d-flex bg-dark m-0 p-0 justify-content-end">
-            <Input className='form-control w-auto ml-2'type="text" placeholder="Digite um filme" onChange={(event) => dispatch(actions.setQuery(event.target.value))} />
+            <Input className='form-control w-25 ml-2'type="text" placeholder="Digite um filme" onChange={(event) => dispatch(actions.setQuery(event.target.value))} />
             <Button className='ml-1' type="submit" color="info" onClick={(event) => {
               dispatch(actions.setSearchType('query'))
               dispatch(actions.handleSearch(state.query,1))
@@ -42,7 +41,7 @@ function Home() {
       </Container>
 
 
-      <Container className="themed-container ml-auto mr-auto text-center row justify-content-center bg-light pr-0 pl-0" fluid="lg">
+      <Container className="themed-container ml-auto mr-auto text-center row justify-content-center bg-light pr-0 pl-0" fluid={true}>
         {state.response &&
           state.response.results.map((film) => {
           if (film.poster_path) {

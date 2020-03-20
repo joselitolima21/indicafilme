@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Row } from 'reactstrap';
+import { Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import { useSelector, useDispatch } from 'react-redux'
 import { actions } from '../store/reducers/reducer.js'
 
@@ -14,7 +14,7 @@ const Search = (props) => {
     const toggle = () => setDropdownOpen(prevState => !prevState);
 
     return (
-        <Row>
+    
             <Dropdown isOpen={dropdownOpen} toggle={toggle}>
                 <DropdownToggle className="ml-2" caret>
                     {choiecedGenre}
@@ -31,7 +31,6 @@ const Search = (props) => {
                     key={genre.id}>{genre.name}</DropdownItem>)}
                 </DropdownMenu>
         </Dropdown>
-        </Row >
     );
 }
 
